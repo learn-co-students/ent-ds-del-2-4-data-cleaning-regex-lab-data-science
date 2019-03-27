@@ -75,24 +75,11 @@ Lady, King, Malcome, Donalbaine, Lenox, Witches, Captaine, Banquo
 
 Return a list that contains every match to any one of those strings.
 
-
-```python
-characters = re.findall(r'Lady|King|Malcome|Donalbaine|Lenox|Witches|Captaine|Banquo', macbeth)
-print(characters)
-```
-
 And for bonus points (not required!), see if you can write a script that counts the number of each mentions and returns something similar to a dictionary with the number of mentions of each word. It should look something like:
 
 {'King': 12, 'Lady': 12, 'Banquo': 12, 'Lenox': 12, 'Witches': 12, 'Donalbaine': 12, 'Captaine': 12, 'Malcome': 12}
 
 Hint, there's a special library you can import - the syntax is `from collections import Counter` - see if you can Google to figure out how to use it!
-
-
-```python
-from collections import Counter
-mention_counts = Counter(characters)
-print(mention_counts)
-```
 
 ## Summary
 
