@@ -27,6 +27,8 @@ content = "It's the end of the world as we know it, and I feel fine."
 # Uncomment the line below this comment, and write the code to apply the sub() regex method to the content variable, 
 # to create a new variable called "without_punctuation" that has the same text, but no apostrophes, commas or periods.
 # without_punctuation = . . .
+import re
+without_punctuation = re.sub("['',.]", "", content)
 print(without_punctuation)
 ```
 
@@ -35,6 +37,8 @@ Great! Now in the cell below, take the original content variable and remove ever
 
 ```python
 # your code goes here
+import re
+without_punctuation_or_spaces = re.sub("['',. ]", "", content)
 print(without_punctuation_or_spaces)
 ```
 
@@ -43,6 +47,8 @@ Alright! Next up, in the cell below, remove everything that *is* a letter - just
 
 ```python
 # your code goes here
+import re
+spaces_and_punctuation_only = re.sub("[^'',. ]", "", content)
 print(spaces_and_punctuation_only)
 ```
 
@@ -52,6 +58,8 @@ Looking good! In the following cell create and print two new variables - let's c
 ```python
 a_well_known_phrase = "The quick brown fox jumps over the lazy dog"
 # your code goes here
+vowels = re.sub("[^aeiou]", "", a_well_known_phrase)
+consonants = re.sub("[aeiou ]", "", a_well_known_phrase)
 print(vowels)
 print(consonants)
 ```
@@ -60,15 +68,43 @@ print(consonants)
 
 Alright! There is a csv in this directory. It's called "company_list.csv". In the cell below, write the code to import it into a DataFrame - lets call the DataFrame "companies" to reflect what it contains.
 
+
+```python
+import pandas as pd
+companies = pd.read_csv("company_list.csv")
+print(companies.head(3))
+companies.info()
+```
+
 Great! Now write a script to take the FaxNumber column, and to remove any non-numeric characters.
+
+
+```python
+companies["FaxNumber"] = companies["FaxNumber"].str.replace("[^0-9]", "")
+companies.head(3)
+```
 
 Now write a script to strip non-numeric characters from the AnnualRevenues, and then to change the data type to integer and display the mean AnnualRevenues for a company on this list. 
 
 ***What is the mean revenue for a company on this list according to the data in the spreadsheet?***
 
+
+```python
+companies["AnnualRevenues"] = companies["AnnualRevenues"].str.replace("[^0-9.]", "")
+companies["AnnualRevenues"] = companies["AnnualRevenues"].astype("float").astype("int64")
+companies.describe()
+# The mean is 6.200000e+07 = which is $62,000,000
+```
+
 ## Importing and Retrieving Substrings from a Larger File
 
 There's a text file called `macbeth.txt` in this project directory. Open and read the file into a variable called macbeth.
+
+
+```python
+macbeth  = open("macbeth.txt", "r").read()
+print(macbeth[:500])
+```
 
 OK, now we have the text of Macbeth, lets find all of the references to the following characters:
 Lady, King, Malcome, Donalbaine, Lenox, Witches, Captaine, Banquo
